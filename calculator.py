@@ -10,10 +10,10 @@ logo = """
 | | Pythonista   0. | |  .----------------.  .----------------.  .----------------.  .----------------. 
 | |_________________| | | .--------------. || .--------------. || .--------------. || .--------------. |
 |  ___ ___ ___   ___  | | |     ______   | || |      __      | || |   _____      | || |     ______   | |
-| | 7 | 8 | 9 | | + | | | |   .' ___  |  | || |     /  \     | || |  |_   _|     | || |   .' ___  |  | |
-| |___|___|___| |___| | | |  / .'   \_|  | || |    / /\ \    | || |    | |       | || |  / .'   \_|  | |
-| | 4 | 5 | 6 | | - | | | |  | |         | || |   / ____ \   | || |    | |   _   | || |  | |         | |
-| |___|___|___| |___| | | |  \ '.___.'\  | || | _/ /    \ \_ | || |   _| |__/ |  | || |  \ '.___.'\  | |
+| | 7 | 8 | 9 | | + | | | |   .' ___  |  | || |     /  \\     | || |  |_   _|     | || |   .' ___  |  | |
+| |___|___|___| |___| | | |  / .'   \\_|  | || |    / /\\ \\    | || |    | |       | || |  / .'   \\_|  | |
+| | 4 | 5 | 6 | | - | | | |  | |         | || |   / ____ \\   | || |    | |   _   | || |  | |         | |
+| |___|___|___| |___| | | |  \\ '.___.'\\  | || | _/ /    \\ \\_ | || |   _| |__/ |  | || |  \\ '.___.'\\  | |
 | | 1 | 2 | 3 | | x | | | |   '._____.'  | || ||____|  |____|| || |  |________|  | || |   '._____.'  | |
 | |___|___|___| |___| | | |              | || |              | || |              | || |              | |
 | | . | 0 | = | | / | | | '--------------' || '--------------' || '--------------' || '--------------' |
@@ -46,32 +46,47 @@ operations = {
 # TODO - Use the dict operations to perform the calculations. Multiple 4 * 8
 # print(operations["*"](4,8))
 
+result = 0
 # TODO - Program asks the user to type the first number
-first_num = input("What's the first number?: ")
 
-# TODO - Program asks the user to type a mathematical operator
-operation = input("+ \n - \n * \n / \n Pick an operation: ")
+def calc(first_num):
+    """This function is the main logical operation for the calculation with first number asked in the main function of the operations"""
+    global result
+    # TODO - Program asks the user to type a mathematical operator
+    operation = input("+ \n- \n* \n/ \nPick an operation: ")
 
-# TODO - Program asks the user to type the second number
-second_number = input("What's the next number?: ")
+    # TODO - Program asks the user to type the second number
+    second_number = float(input("What's the next number?: "))
 
-# TODO - Program works out the result based on chosen math operator
-if operation == "+":
-    result = operations["+"](first_num, second_number)
-elif operation == "-":
-    result = operations["-"](first_num, second_number)
-elif operation == "*":
-    result = operations["*"](first_num, second_number)
-elif operation == "/":
-    result = operations["/"](first_num, second_number)
-else:
-    print("Invalid operation. Try again.")
+    # TODO - Program works out the result based on chosen math operator
+    if operation == "+":
+        result = operations["+"](first_num, second_number)
+    elif operation == "-":
+        result = operations["-"](first_num, second_number)
+    elif operation == "*":
+        result = operations["*"](first_num, second_number)
+    elif operation == "/":
+        result = operations["/"](first_num, second_number)
+    else:
+        print("Invalid operation. Try again.")
 
-print(f"{first_num} {operation} {second_number} = {result}")
+    print(f"{first_num} {operation} {second_number} = {result}")
 
 # TODO - Program asks if the user wantes to continue wokring with previous result
-cont = input(f"Type 'y' to continue calculating with {result}, or type 'n' to start a new calculation: ")
-
+def main():
+    global result
+    print(logo)
+    first_num = float(input("What's the first number?: "))
+    while 1:
+        calc(first_num=first_num)
+        cont = input(f"Type 'y' to continue counting with {result}, or type 'n' to start a new calculation: ").lower()
 # TODO - If yes, program loops to use the previous result as the first number and then repreats the calc process
-
+        if cont == 'y':
+            first_num = result
 # TODO - If no, program asks the user for the first number again and wipes all memory of previous run
+        elif cont == "n":
+            first_num = 0.0
+            main()
+
+if __name__ == "__main__":
+    main()
